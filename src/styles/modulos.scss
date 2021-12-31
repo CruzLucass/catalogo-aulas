@@ -1,0 +1,26 @@
+.container-lista{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.title{
+
+    h1{
+        font: 700 24px 'Poppins', sans-serif;
+        line-height: 42px;
+        margin-top: 16px;
+    }
+}
+
+ul{
+
+    li{
+        flex: 1;
+        margin-top: 20px;
+        font: 700 30px 'Roboto', sans-serif;
+    }
+}
