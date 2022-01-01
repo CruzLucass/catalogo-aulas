@@ -1,12 +1,18 @@
+import { useEffect } from 'react';
+import { Column } from '../components/Column';
+import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { List } from '../components/List';
+import { useModulo } from '../hooks/useModulos';
 import '../styles/modulos.scss'
 
 export function Modulos() {
 
-    const modulos = [
-        { id: 1, nome: "Backend" },
-        { id: 2, nome: "Frontend" }
-    ]
+    const { modulos, getAll } = useModulo();
+
+    useEffect(() => {
+        getAll();
+    }, [getAll]);
 
     return (
         <>
@@ -15,12 +21,11 @@ export function Modulos() {
                 <div className='title'>
                     <h1>Confira todos os módulos do nosso curso</h1>
                 </div>
-                <ul>
-                    {modulos.map((modulos) => <li key={modulos.id}>{modulos.nome}</li>)}
-                </ul>
+                <Column>
+                    <List items={modulos} />
+                </Column>
             </div>
+            <Footer />
         </>
-
-
     );
 }

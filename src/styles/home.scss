@@ -1,0 +1,106 @@
+.container-home {
+    justify-content: center;
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+
+    .inscricao {
+        flex: 7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px 80px 80px 80px;
+
+        margin: 20px 0 40px 20px;
+
+        border-radius: 50px 0 0 50px;
+
+        background: #a8a8b3;
+
+        h2 {
+            font: 700 36px "Poppins", sans-serif;
+            line-height: 42px;
+            margin-top: 16px;
+        }
+        strong {
+            font-size: 24px;
+            line-height: 32px;
+            margin-top: 16px;
+        }
+    }
+    .imagem {
+        flex: 8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 20px 40px -50px;
+        border-radius: 50px 50px 50px 50px;
+        background: #835afd;
+
+        img {
+            width: 100%;
+            height: 60%;
+            border-radius: 10px;
+            opacity: 0.8;
+        }
+    }
+}
+.banner {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 200px;
+    margin: 20px;
+    flex-direction: column;
+
+    background: #835afd;
+    color: #f8f8f8;
+    border-radius: 50px 50px 50px 50px;
+
+    h3 {
+        font: 700 24px "Poppins", sans-serif;
+        line-height: 42px;
+        margin-top: 20px;
+    }
+
+    form {
+        input {
+            height: 50px;
+            border-radius: 8px;
+            padding: 16px;
+            background: #fff;
+            border: 1px solid #a8a8b3;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        button {
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+
+            height: 50px;
+            border-radius: 8px;
+            font-weight: 500;
+            background: #a8a8b3;
+            color: #fff;
+            padding: 0 32px;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 0;
+
+            transition: filter 0.2s;
+
+            &:not(:disabled):hover {
+                filter: brightness(0.9);
+            }
+
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
