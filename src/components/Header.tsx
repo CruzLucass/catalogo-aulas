@@ -1,7 +1,16 @@
-import { Outlet, Link } from 'react-router-dom'
+import { useContext } from 'react';
+import { Link } from 'react-router-dom'
 import '../styles/header.scss'
+import { useAuth } from '../context/auth';
 
 export function Header() {
+    const { Logout } = useAuth();
+
+    async function handleLogout() {
+        Logout();
+        console.log('você esta deslogado.')
+    }
+
     return (
         <div className="container">
             <div className='logo'>
@@ -13,13 +22,16 @@ export function Header() {
                 <Link to={"/home"} className='link'>
                     Home
                 </Link>
+                <Link type="submit" to={"/cadastro"} className='link'>
+                    Cadastro
+                </Link>
                 <Link to={"/modulos"} className='link'>
                     Modulos
                 </Link>
                 <Link to={"/aulas"} className='link'>
                     Aulas
                 </Link>
-                <Link to={"/"} className='link'>
+                <Link to={"/"} className='link' onClick={handleLogout}>
                     Sair
                 </Link>
             </div>

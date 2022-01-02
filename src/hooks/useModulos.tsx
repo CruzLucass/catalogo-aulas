@@ -9,7 +9,7 @@ export const useModulo = () => {
     const getAll = useCallback(async () => {
         const { status, data } = await ModuloService.getAll();
 
-        if (status != 200) throw new Error();
+        if (status !== 200) throw new Error();
 
         setModulos(data);
 

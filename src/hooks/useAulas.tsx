@@ -9,7 +9,7 @@ export const useAulas = () => {
     const getAll = useCallback(async () => {
         const { status, data } = await AulaService.getAll();
 
-        if (status != 200) throw new Error();
+        if (status !== 200) throw new Error();
 
         setAulas(data);
 

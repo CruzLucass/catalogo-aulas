@@ -1,10 +1,41 @@
 import '../styles/auth.scss'
 import '../styles/button.scss'
 import devto from '../assets/images/devto.svg'
-import { Outlet, Link } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { Footer } from '../components/Footer'
+import { useState } from 'react'
+import { Button } from '../components/Button'
+import { useAuth } from '../context/auth'
+import { render } from '@testing-library/react'
+import { Alert } from 'react-bootstrap'
+
+
+function initialState() {
+    return { email: '', password: '' };
+}
 
 export function Login() {
+    const { Sign, signed } = useAuth();
+
+    const [values, setValues] = useState(initialState);
+
+    function onChange(event: any) {
+        const { value, name } = event.target;
+
+        setValues({
+            ...values,
+            [name]: value,
+        });
+
+    }
+
+    async function onSubmit(event: any) {
+        event.preventDefault();
+
+        Sign({ email: values.email, password: values.password });
+
+        setValues(initialState);
+    }
 
     return (
         <>
@@ -16,24 +47,28 @@ export function Login() {
                 </aside>
                 <main>
                     <div className='main-content'>
-                        <h1>Entre e saiba mais</h1>
-                        <form>
+                        <h1>Faça login</h1>
+
+                        <form onSubmit={onSubmit}>
                             <input
-                                type="text"
+                                name="email"
+                                type="email"
                                 placeholder="Email"
+                                onChange={onChange}
+                                value={values.email}
                             />
                             <input
+                                name="password"
                                 type="password"
                                 placeholder="Senha"
+                                onChange={onChange}
+                                value={values.password}
                             />
-                            <Link type="submit" to={"/home"} className='button'>
+                            <Button type="submit" className='button'>
                                 Faça login
-                            </Link>
-                            <Link type="submit" to={"/cadastro"} className='cadastro'>
-                                Cadastre-se
-                            </Link>
+                            </Button>
+
                         </form>
-                        <Outlet />
                     </div>
                 </main>
 
