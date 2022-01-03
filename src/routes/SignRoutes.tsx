@@ -8,7 +8,7 @@ const SignRoutes: React.FC = () => {
     return (
         <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="*" element={<ErrorPage />} />
+            <Route path="*" element={<Login />} />
         </Routes>
     );
 };

@@ -1,13 +1,10 @@
 import '../styles/auth.scss'
 import '../styles/button.scss'
 import devto from '../assets/images/devto.svg'
-import { Navigate, useNavigate } from 'react-router-dom'
 import { Footer } from '../components/Footer'
 import { useState } from 'react'
 import { Button } from '../components/Button'
 import { useAuth } from '../context/auth'
-import { render } from '@testing-library/react'
-import { Alert } from 'react-bootstrap'
 
 
 function initialState() {
@@ -15,7 +12,7 @@ function initialState() {
 }
 
 export function Login() {
-    const { Sign, signed } = useAuth();
+    const { Sign } = useAuth();
 
     const [values, setValues] = useState(initialState);
 

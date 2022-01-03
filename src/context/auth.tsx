@@ -19,13 +19,16 @@ export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<object | null>(null);
 
     useEffect(() => {
-        const storagedUser = sessionStorage.getItem('@App:user');
-        const storagedToken = sessionStorage.getItem('@App:token');
+        function loadStoragedData() {
+            const storagedUser = sessionStorage.getItem('@App:user');
+            const storagedToken = sessionStorage.getItem('@App:token');
 
-        if (storagedToken && storagedUser) {
-            setUser(JSON.parse(storagedUser));
-            Api.defaults.headers.common['Authorization'] = `Bearer ${storagedToken}`;
+            if (storagedToken && storagedUser) {
+                setUser(JSON.parse(storagedUser));
+                Api.defaults.headers.common['Authorization'] = `Bearer ${storagedToken}`;
+            }
         }
+        loadStoragedData();
     }, []);
 
     async function Sign(user: object) {
@@ -48,6 +51,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     function Logout() {
         setUser(null);
         setToken('');
+
+        sessionStorage.removeItem('@App:user');
+        sessionStorage.removeItem('App:token');
     }
 
     return (

@@ -12,7 +12,7 @@ export function Header() {
     }
 
     return (
-        <div className="container">
+        <div className="containerheader">
             <div className='logo'>
                 <strong>
                     Cursos para Dev's

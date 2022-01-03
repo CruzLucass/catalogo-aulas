@@ -1,22 +1,21 @@
-import { useState } from "react";
-import { Alert, Toast, ToastContainer } from "react-bootstrap";
-import Button from "react-bootstrap/esm/Button";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { Api } from "../providers";
 
+import { useState } from 'react';
+import { Toast, ToastContainer } from 'react-bootstrap';
+import { Navigate } from 'react-router';
+import { Button } from '../components/Button';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import { Api } from '../providers';
 import '../styles/cadastro.scss';
 
 function initialState() {
-    return { email: '', password: '', confirmPassword: '' };
+    return { nome: '' };
 }
-export interface NewUser {
-    email: string;
-    password: string;
-    confirmPassword: string;
+export interface NewModulo {
+    nome: string;
 }
 
-export function Cadastro() {
+export function AddModulo() {
     const [values, setValues] = useState(initialState);
     const [show, setShow] = useState(false);
 
@@ -30,11 +29,12 @@ export function Cadastro() {
 
     }
 
-    async function addUser(NewUser: object) {
-        const response = await Api.post('/Auth/novo-usuario', NewUser);
+    async function addModulo(NewModulo: object) {
+        const response = await Api.post('/Modulos', NewModulo);
         console.log(response);
-        if (response.status === 200) {
+        if (response.status === 201) {
             setShow(true);
+            <Navigate to="/modulos" replace={true} />
         } else {
             console.log(response.data);
         }
@@ -44,7 +44,7 @@ export function Cadastro() {
     async function onSubmit(event: any) {
         event.preventDefault();
 
-        addUser({ email: values.email, password: values.password, confirmPassword: values.confirmPassword });
+        addModulo({ nome: values.nome });
 
         setValues(initialState);
     }
@@ -53,29 +53,15 @@ export function Cadastro() {
         <div>
             <Header />
             <div className='formCadastro'>
-                <h1>Cadastrar novo usuário</h1>
+                <h1>Cadastrar novo Modulo</h1>
 
                 <form onSubmit={onSubmit}>
                     <input
-                        name="email"
-                        type="email"
-                        placeholder="Email"
+                        name="nome"
+                        type="text"
+                        placeholder="Nome"
                         onChange={onChange}
-                        value={values.email}
-                    />
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="Senha"
-                        onChange={onChange}
-                        value={values.password}
-                    />
-                    <input
-                        name="confirmPassword"
-                        type="password"
-                        placeholder="Confirmar senha"
-                        onChange={onChange}
-                        value={values.confirmPassword}
+                        value={values.nome}
                     />
                     <Button type="submit" className='button'>
                         Cadastrar
@@ -94,7 +80,7 @@ export function Cadastro() {
                         <strong className="me-auto">Sucesso!</strong>
                         <small>now</small>
                     </Toast.Header>
-                    <Toast.Body>Usuário cadastrado com sucesso</Toast.Body>
+                    <Toast.Body>Modulo cadastrado com sucesso</Toast.Body>
                 </Toast>
             </ToastContainer>
             <Footer />
