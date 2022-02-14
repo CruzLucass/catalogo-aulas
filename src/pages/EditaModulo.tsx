@@ -1,12 +1,9 @@
-
-import { useState } from 'react';
-import { Toast, ToastContainer } from 'react-bootstrap';
-import { Navigate } from 'react-router';
-import { Button } from '../components/Button';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
-import { Api } from '../providers';
-import '../styles/cadastro.scss';
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { Button } from "../components/Button";
+import { Footer } from "../components/Footer";
+import { Header } from "../components/Header";
+import { Api } from "../providers";
 
 function initialState() {
     return { nome: '' };
@@ -15,7 +12,7 @@ export interface NewModulo {
     nome: string;
 }
 
-export function AddModulo() {
+export function EditaModulo() {
     const [values, setValues] = useState(initialState);
     const [show, setShow] = useState(false);
 
@@ -26,7 +23,6 @@ export function AddModulo() {
             ...values,
             [name]: value,
         });
-
     }
 
     async function addModulo(NewModulo: object) {
@@ -38,7 +34,6 @@ export function AddModulo() {
         } else {
             console.log(response.data);
         }
-
     }
 
     function onSubmit(event: any) {
@@ -53,7 +48,7 @@ export function AddModulo() {
         <div>
             <Header />
             <div className='formCadastro'>
-                <h1>Cadastrar novo Modulo</h1>
+                <h1>Editar Modulo</h1>
 
                 <form onSubmit={onSubmit}>
                     <input
@@ -64,26 +59,12 @@ export function AddModulo() {
                         value={values.nome}
                     />
                     <Button type="submit" className='button'>
-                        Cadastrar
+                        Salvar
                     </Button>
 
                 </form>
             </div>
-            <ToastContainer className="p-3" position={'top-center'}>
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                    <Toast.Header closeButton={false}>
-                        <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                        />
-                        <strong className="me-auto">Sucesso!</strong>
-                        <small>now</small>
-                    </Toast.Header>
-                    <Toast.Body>Modulo cadastrado com sucesso</Toast.Body>
-                </Toast>
-            </ToastContainer>
             <Footer />
         </div>
-    )
+    );
 }

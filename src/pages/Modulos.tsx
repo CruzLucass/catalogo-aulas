@@ -59,7 +59,7 @@ export function Modulos() {
                                 <td>{item.id}</td>
                                 <td>{item.nome}</td>
                                 <td>
-                                    <Link className="btn btn-warning" to={"/editalivro/" + item.id}>Editar</Link>
+                                    <Link className="btn btn-warning" to={"/editamodulo/:" + item.id}>Editar</Link>
                                     <a className="btn btn-warning" onClick={() => handleDeleteModulo(item.id)} >Excluir</a>
                                 </td>
                             </tr>

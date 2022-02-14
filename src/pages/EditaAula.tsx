@@ -1,26 +1,17 @@
-
-import { useEffect, useState } from 'react';
-import { Toast, ToastContainer } from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
-import { Button } from '../components/Button';
+import { Header } from "../components/Header";
 import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
-import { useModulo } from '../hooks/useModulos';
-import { Api } from '../providers';
-import '../styles/cadastro.scss';
+import { Button } from "../components/Button";
+import { Navigate } from "react-router-dom";
+import { Api } from "../providers";
+import { useEffect, useState } from "react";
+import { useModulo } from "../hooks/useModulos";
 
 function initialState() {
     return { nome: '', data: Date(), moduloId: 0 };
 }
-export interface NewAula {
-    nome: string;
-    data: Date;
-    moduloId: number;
-}
 
-export function AddAula() {
+export function EditaAula() {
     const [values, setValues] = useState(initialState);
-    const [show, setShow] = useState(false);
     const { modulos, getAll } = useModulo();
 
     useEffect(() => {
@@ -34,26 +25,25 @@ export function AddAula() {
             ...values,
             [name]: value,
         });
-
     }
 
-    async function addAula(NewAula: object) {
+
+    async function editarAula(NewAula: object) {
         const response = await Api.post('/Aulas', NewAula);
         console.log(response.data);
 
         if (response.status === 201) {
-            setShow(true);
+            // setShow(true);
             <Navigate to="/aulas" replace={true} />
         } else {
             console.log(response.data);
         }
-
     }
 
     function onSubmit(event: any) {
         event.preventDefault();
         console.log(values);
-        addAula({ nome: values.nome, data: values.data, moduloId: values.moduloId });
+        editarAula({ nome: values.nome, data: values.data, moduloId: values.moduloId });
 
         setValues(initialState);
     }
@@ -62,7 +52,7 @@ export function AddAula() {
         <div>
             <Header />
             <div className='formCadastro'>
-                <h1>Cadastrar nova Aula</h1>
+                <h1>Editar Aula</h1>
 
                 <form onSubmit={onSubmit}>
                     <input
@@ -88,26 +78,12 @@ export function AddAula() {
                         ))}
                     </select>
                     <Button type="submit" className='button'>
-                        Cadastrar
+                        Salvar
                     </Button>
 
                 </form>
             </div>
-            <ToastContainer className="p-3" position={'top-center'}>
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                    <Toast.Header closeButton={false}>
-                        <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                        />
-                        <strong className="me-auto">Sucesso!</strong>
-                        <small>now</small>
-                    </Toast.Header>
-                    <Toast.Body>Aula cadastrada com sucesso</Toast.Body>
-                </Toast>
-            </ToastContainer>
             <Footer />
         </div>
-    )
+    );
 }

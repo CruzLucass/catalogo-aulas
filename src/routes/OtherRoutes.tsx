@@ -6,6 +6,8 @@ import { Aulas } from '../pages/Aulas';
 import { Home } from '../pages/Home';
 import { AddAula } from '../pages/AddAula';
 import { AddModulo } from '../pages/AddModulo';
+import { EditaModulo } from '../pages/EditaModulo';
+import { EditaAula } from '../pages/EditaAula';
 
 const OtherRoutes: React.FC = () => {
     return (
@@ -16,6 +18,8 @@ const OtherRoutes: React.FC = () => {
             <Route path="/aulas" element={<Aulas />} />
             <Route path="/addmodulo" element={<AddModulo />} />
             <Route path="/addaula" element={<AddAula />} />
+            <Route path="/editamodulo/:id" element={<EditaModulo />} />
+            <Route path="/editaaula/:id" element={<EditaAula />} />
             <Route path="*" element={<Home />} />
         </Routes>
     );
